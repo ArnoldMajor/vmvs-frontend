@@ -8,14 +8,14 @@ document.getElementById('submitVIN').addEventListener('click', function () {
     setTimeout(() => {
         loadingScreen.style.display = 'none';
         loadingScreen.classList.add('hidden');
-    }, 20000);
+    }, 22000);
 
     const vinValue = document.getElementById('inputVIN').value;
     if (!vinValue) {
         alert('Please enter a VIN');
         return;
     }
-    fetch(`https://vmvstrial1-e7fcd34a5e0d.herokuapp.com?vin=${vinValue}`)
+    fetch(`https://vmvs-tz-3837bbea9d5b.herokuapp.com/scrape?vin=${vinValue}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok: ' + response.statusText);
