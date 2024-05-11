@@ -11,8 +11,17 @@ document.getElementById('submitVIN').addEventListener('click', function () {
     }, 20000);
 
     const vinValue = document.getElementById('inputVIN').value;
+    if (!vinValue) {
+        alert('Please enter a VIN');
+        return;
+    }
     fetch(`https://vmvstrial1-e7fcd34a5e0d.herokuapp.com/scrape?vin=${vinValue}`)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok: ' + response.statusText);
+            }
+            return response.json();
+        })
         .then(data => {
             if (data.error) {
                 document.getElementById('resultContainer').textContent = 'Error fetching data';
@@ -25,7 +34,7 @@ document.getElementById('submitVIN').addEventListener('click', function () {
             }
         })
         .catch(error => {
-            console.error('Error:', error);
+            console.error('Fetch error:', error.message);
             document.getElementById('resultContainer').textContent = 'Error fetching data';
         });
 });
