@@ -15,7 +15,7 @@ document.getElementById('submitVIN').addEventListener('click', function () {
         alert('Please enter a VIN');
         return;
     }
-    fetch(`https://vmvstrial1-e7fcd34a5e0d.herokuapp.com/scrape?vin=${vinValue}`)
+    fetch(`https://vmvstrial1-e7fcd34a5e0d.herokuapp.com?vin=${vinValue}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok: ' + response.statusText);
